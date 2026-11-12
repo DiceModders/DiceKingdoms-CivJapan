@@ -1,0 +1,162 @@
+{
+ "note": "Japan civilization data: names (per language), unit / technology texts, which model replaces which look-alike (Viking) model, ground and nature colours.",
+ "key": "dicemodders.japan",
+ "token": "japan",
+ "texts": {
+  "unit.SOLDIER.name": {
+   "en": "Ashigaru",
+   "ru": "Асигару",
+   "uk": "Асіґару",
+   "zh-CN": "足轻"
+  },
+  "unit.ARCHER.name": {
+   "en": "Yumi Ashigaru",
+   "ru": "Лучник-асигару",
+   "uk": "Лучник-асіґару",
+   "zh-CN": "弓足轻"
+  },
+  "unit.GENERAL.name": {
+   "en": "Taisho",
+   "ru": "Тайсё",
+   "uk": "Тайсьо",
+   "zh-CN": "大将"
+  },
+  "unit.KING.name": {
+   "en": "Daimyo",
+   "ru": "Даймё",
+   "uk": "Даймьо",
+   "zh-CN": "大名"
+  },
+  "unit.PEASANT.name": {
+   "en": "Hyakusho",
+   "ru": "Хякусё",
+   "uk": "Хякусьо",
+   "zh-CN": "百姓"
+  },
+  "unit.BOURGEOIS.name": {
+   "en": "Chonin",
+   "ru": "Тёнин",
+   "uk": "Тьонін",
+   "zh-CN": "町人"
+  },
+  "unit.PRIEST.name": {
+   "en": "Soryo",
+   "ru": "Сорё",
+   "uk": "Сорьо",
+   "zh-CN": "僧侣"
+  },
+  "unit.SORCERER.name": {
+   "en": "Onmyoji",
+   "ru": "Оммёдзи",
+   "uk": "Онмьоджі",
+   "zh-CN": "阴阳师"
+  },
+  "unit.TEMPLAR.name": {
+   "en": "Sohei",
+   "ru": "Сохэй",
+   "uk": "Сохей",
+   "zh-CN": "僧兵"
+  },
+  "unit.WARLOCK.name": {
+   "en": "Yamabushi",
+   "ru": "Ямабуси",
+   "uk": "Ямабусі",
+   "zh-CN": "山伏"
+  },
+  "technology.TEMPLARS.name": {
+   "en": "Sohei",
+   "ru": "Сохэй",
+   "uk": "Сохей",
+   "zh-CN": "僧兵"
+  },
+  "technology.TEMPLARS.description": {
+   "en": "Replaces ashigaru with sohei.",
+   "ru": "Заменяет асигару на сохэев.",
+   "uk": "Замінює асіґару на сохеїв.",
+   "zh-CN": "以僧兵取代足轻。"
+  },
+  "technology.WARLOCKS.name": {
+   "en": "Yamabushi",
+   "ru": "Ямабуси",
+   "uk": "Ямабусі",
+   "zh-CN": "山伏"
+  },
+  "technology.WARLOCKS.description": {
+   "en": "Replaces yumi ashigaru with yamabushi.",
+   "ru": "Заменяет лучников-асигару на ямабуси.",
+   "uk": "Замінює лучників-асіґару на ямабусі.",
+   "zh-CN": "以山伏取代弓足轻。"
+  }
+ },
+ "civilization": "VIKING",
+ "models": {
+  "castle-viking": "japanese-v2",
+  "house-viking": "jp-house",
+  "cottage-viking": "jp-cottage",
+  "farm-viking": "jp-farm",
+  "church-viking": "jp-church",
+  "barracks-viking": "jp-barracks",
+  "storage-viking": "jp-storage",
+  "guard-tower-viking": "jp-guard-tower",
+  "guard-tower-up-viking": "jp-guard-tower-up",
+  "market-viking": "jp-market",
+  "university-viking": "jp-university",
+  "hospital-viking": "jp-hospital",
+  "cathedral-viking": "jp-cathedral",
+  "archery-range-viking": "jp-archery-range",
+  "lumber-camp-viking": "jp-lumber-camp",
+  "stone-quarry-viking": "jp-stone-quarry",
+  "land-camp-viking": "jp-land-camp",
+  "sorcerer-tower-viking": "jp-sorcerer-tower",
+  "wonder-viking": "jp-wonder",
+  "dock-viking": "jp-dock",
+  "fishing-ship-viking": "jp-fishing-ship",
+  "lighthouse-viking": "jp-lighthouse",
+  "windmill-viking": "jp-windmill",
+  "wall-viking": "jp-wall",
+  "ship-viking": "jp-ship",
+  "soldier-viking": "jp-soldier",
+  "archer-viking": "jp-archer",
+  "general-viking": "jp-general",
+  "king-viking": "jp-king",
+  "peasant-viking": "jp-peasant",
+  "bourgeois-viking": "jp-bourgeois",
+  "priest-viking": "jp-priest",
+  "templar-viking": "jp-templar",
+  "sorcerer-viking": "jp-sorcerer",
+  "warlock-viking": "jp-warlock"
+ },
+ "skinned": [
+  "jp-ship",
+  "jp-windmill",
+  "jp-soldier",
+  "jp-archer",
+  "jp-general",
+  "jp-king",
+  "jp-peasant",
+  "jp-bourgeois",
+  "jp-priest",
+  "jp-templar",
+  "jp-sorcerer",
+  "jp-warlock"
+ ],
+ "ground": {
+  "cells": {
+   "4,3": "#62a04f",
+   "4,4": "#68a654",
+   "0,2": "#6b4a3a"
+  },
+  "natureCells": {
+   "2,2": "#68a654",
+   "0,2": "#6b4a3a"
+  }
+ },
+ "name": {
+  "en": "Japan",
+  "de": "Japan",
+  "fr": "Japon",
+  "ru": "Япония",
+  "uk": "Японія",
+  "zh-CN": "日本"
+ }
+}

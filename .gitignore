@@ -1,0 +1,14 @@
+bin/
+obj/
+.vs/
+*.user
+/.vscode/settings.json
+/dist/
+# junction to <game>/BepInEx/interop (made by scripts/build.ps1)
+/interop
+# the DiceModders libraries, copied from <game>/BepInEx/plugins by scripts/build.ps1
+/libs/
+# remembers your game folder for the scripts
+/.gamedir
+# game-derived files must never be committed
+*.zip

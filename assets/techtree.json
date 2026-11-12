@@ -1,0 +1,30 @@
+{
+ "Japan": {
+  "civilization": "JAPAN",
+  "note": "Same 22 technologies and costs as every civ; only the layout/links differ. Layout rule taken from the game's own trees: every line spans one row at most and a box has at most one line per direction (up/straight/down), so lines never cross or share a port (2026-11-05: Rituals moved from Cathedral to Guard Tower Up, like the Viking tree). Learnable rule (Statistics.IsTechnologyLearnable): no dependencies, or ANY dependency learnt.",
+  "slots": [
+   {"slot": 0,  "technology": "UNLOCK_ARCHERY_RANGE",   "position": [0, 0], "unlocks": ["UNLOCK_GUARD_TOWER"]},
+   {"slot": 1,  "technology": "UNLOCK_FISHING_SHIP",    "position": [0, 2], "unlocks": ["UNLOCK_LIGHTHOUSE", "UNLOCK_HOSPITAL"]},
+   {"slot": 2,  "technology": "UNLOCK_SORCERER_TOWER",  "position": [0, 3], "unlocks": ["UNLOCK_HOSPITAL", "ADDITIONAL_ROLL"]},
+   {"slot": 3,  "technology": "UNLOCK_STORAGE",         "position": [0, 4], "unlocks": ["UNLOCK_MARKET"]},
+   {"slot": 4,  "technology": "UNLOCK_GUARD_TOWER",     "position": [2, 0], "unlocks": ["UPGRADE_GUARD_TOWER"]},
+   {"slot": 5,  "technology": "UNLOCK_LIGHTHOUSE",      "position": [2, 1], "unlocks": ["SHIP_HOLD_OPTIMIZATION"]},
+   {"slot": 6,  "technology": "UNLOCK_HOSPITAL",        "position": [2, 2], "unlocks": ["UNLOCK_CATHEDRAL"]},
+   {"slot": 7,  "technology": "ADDITIONAL_ROLL",        "position": [2, 3], "unlocks": ["UNLOCK_WINDMILL"]},
+   {"slot": 8,  "technology": "UNLOCK_MARKET",          "position": [2, 4], "unlocks": ["UNLOCK_WINDMILL", "UNLOCK_STONE_QUARRY"]},
+   {"slot": 9,  "technology": "UPGRADE_GUARD_TOWER",    "position": [4, 0], "unlocks": ["RITUALS", "TEMPLARS"]},
+   {"slot": 10, "technology": "SHIP_HOLD_OPTIMIZATION", "position": [4, 1], "unlocks": []},
+   {"slot": 11, "technology": "UNLOCK_CATHEDRAL",       "position": [4, 2], "unlocks": ["TEMPLARS", "DOUBLE_CLEAN_TILE"]},
+   {"slot": 12, "technology": "UNLOCK_WINDMILL",        "position": [4, 3], "unlocks": ["UNLOCK_LUMBER_CAMP"]},
+   {"slot": 13, "technology": "UNLOCK_STONE_QUARRY",    "position": [4, 4], "unlocks": ["UNLOCK_LUMBER_CAMP", "TRADE_EFFICIENCY"]},
+   {"slot": 14, "technology": "RITUALS",                "position": [6, 0], "unlocks": []},
+   {"slot": 15, "technology": "TEMPLARS",               "position": [6, 1], "unlocks": ["WARLOCKS"]},
+   {"slot": 16, "technology": "DOUBLE_CLEAN_TILE",      "position": [6, 2], "unlocks": ["UNLOCK_WONDER"]},
+   {"slot": 17, "technology": "UNLOCK_LUMBER_CAMP",     "position": [6, 3], "unlocks": ["UNLOCK_WONDER"]},
+   {"slot": 18, "technology": "TRADE_EFFICIENCY",       "position": [6, 4], "unlocks": ["UNLOCK_LAND_CAMP"]},
+   {"slot": 19, "technology": "WARLOCKS",               "position": [8, 1], "unlocks": []},
+   {"slot": 20, "technology": "UNLOCK_WONDER",          "position": [8, 2], "unlocks": []},
+   {"slot": 21, "technology": "UNLOCK_LAND_CAMP",       "position": [8, 4], "unlocks": []}
+  ]
+ }
+}

@@ -1,0 +1,102 @@
+# AI build orders for Japan, written for its own tech tree (techtree.json): every technology comes after one of its prerequisites.
+# Roots of the tree: ARCHERY_RANGE, FISHING_SHIP, SORCERER_TOWER, STORAGE. The buildings follow the Viking orders (same biome), with Japan's
+# archers and sohei (Templars) earlier. The civilization= value is replaced by ModCore with Japan's number.
+
+civilization=JAPAN weight=2 strategy=MILITARY name=yumi_ashigaru [
+    technologies [
+        UNLOCK_ARCHERY_RANGE
+        UNLOCK_STORAGE
+        UNLOCK_FISHING_SHIP
+        UNLOCK_GUARD_TOWER
+        UNLOCK_HOSPITAL
+        UNLOCK_MARKET
+        UNLOCK_CATHEDRAL
+        UPGRADE_GUARD_TOWER
+        TEMPLARS
+        UNLOCK_STONE_QUARRY
+        UNLOCK_WINDMILL
+        UNLOCK_LUMBER_CAMP
+        TRADE_EFFICIENCY
+        UNLOCK_LAND_CAMP
+        UNLOCK_SORCERER_TOWER
+        WARLOCKS
+        RITUALS
+        DOUBLE_CLEAN_TILE
+        ADDITIONAL_ROLL
+        UNLOCK_LIGHTHOUSE
+        SHIP_HOLD_OPTIMIZATION
+    ]
+    buildings [
+        house house church cot cot cot archery cot university fish fish house house racks church storage fish racks guard dock cot cot house farm
+        racks church house racks dock racks farm storage church church church guard dock farm cat church church racks racks farm farm farm dock racks racks
+        market quarry storage mill lumber racks racks dock dock dock racks racks dock dock guard guard land land land land land racks land cat racks dock
+        dock dock land land cat land land dock dock land land guard guard
+    ]
+]
+
+civilization=JAPAN weight=1 strategy=MILITARY name=sohei_temples [
+    technologies [
+        UNLOCK_STORAGE
+        UNLOCK_FISHING_SHIP
+        UNLOCK_HOSPITAL
+        UNLOCK_CATHEDRAL
+        TEMPLARS
+        UNLOCK_ARCHERY_RANGE
+        UNLOCK_GUARD_TOWER
+        UNLOCK_MARKET
+        UNLOCK_WINDMILL
+        UNLOCK_STONE_QUARRY
+        UNLOCK_LUMBER_CAMP
+        UPGRADE_GUARD_TOWER
+        WARLOCKS
+        TRADE_EFFICIENCY
+        UNLOCK_LAND_CAMP
+        UNLOCK_SORCERER_TOWER
+        RITUALS
+        DOUBLE_CLEAN_TILE
+        ADDITIONAL_ROLL
+        UNLOCK_LIGHTHOUSE
+        SHIP_HOLD_OPTIMIZATION
+    ]
+    buildings [
+        house house cot church church house house house house cot university church farm farm farm house house house farm racks storage fish house cat
+        house house house fish fish church church cat racks racks guard mill fish racks lumber quarry racks racks storage cat church guard lumber guard guard
+        guard market dock dock dock dock racks racks racks racks lumber racks racks racks storage racks racks church church storage mill dock dock
+        dock dock land land land racks racks racks racks racks land land land guard guard guard guard guard sorcerer sorcerer sorcerer sorcerer
+        sorcerer sorcerer sorcerer sorcerer guard guard guard
+    ]
+]
+
+civilization=JAPAN weight=1 strategy=WONDER name=shogun_castle [
+    technologies [
+        UNLOCK_FISHING_SHIP
+        UNLOCK_STORAGE
+        UNLOCK_HOSPITAL
+        UNLOCK_MARKET
+        UNLOCK_CATHEDRAL
+        UNLOCK_STONE_QUARRY
+        UNLOCK_WINDMILL
+        UNLOCK_LUMBER_CAMP
+        DOUBLE_CLEAN_TILE
+        UNLOCK_WONDER
+        UNLOCK_ARCHERY_RANGE
+        UNLOCK_GUARD_TOWER
+        UPGRADE_GUARD_TOWER
+        TRADE_EFFICIENCY
+        UNLOCK_LAND_CAMP
+        UNLOCK_SORCERER_TOWER
+        TEMPLARS
+        RITUALS
+        WARLOCKS
+        ADDITIONAL_ROLL
+        UNLOCK_LIGHTHOUSE
+        SHIP_HOLD_OPTIMIZATION
+    ]
+    buildings [
+        house house cot cot university church fish fish house church house fish house house racks house cot lumber racks fish church church dock cat market church
+        church fish storage quarry lumber farm mill cot cot cot cot guard guard guard lumber cot cot cot house guard house storage cot cot cot house house house guard guard
+        guard guard dock guard storage guard guard cot cot racks racks dock wonder wonder wonder wonder wonder wonder wonder guard guard guard guard
+        land land land dock land land land land land cat land land land land land dock guard guard guard guard land sorcerer sorcerer sorcerer sorcerer sorcerer
+        sorcerer sorcerer sorcerer sorcerer sorcerer sorcerer
+    ]
+]

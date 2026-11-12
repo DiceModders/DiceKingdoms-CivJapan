@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>DiceModders.CivJapan</AssemblyName>
+    <RootNamespace>DiceModders.CivJapan</RootNamespace>
+    <Description>Japan as a new civilization for Dice Kingdoms: its own buildings, units, tech tree, texts and AI build orders.</Description>
+    <Version>1.0.0</Version>
+    <Authors>DiceModders</Authors>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RestoreAdditionalProjectSources>https://api.nuget.org/v3/index.json;https://nuget.bepinex.dev/v3/index.json</RestoreAdditionalProjectSources>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Debug (scripts\build.ps1 -Dev) defines DEVLOG: extra diagnostics that normal releases do not contain -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DefineConstants>$(DefineConstants);DEVLOG</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <!-- interop: junction to <game>\BepInEx\interop; libs: the installed libraries (both made by scripts\build.ps1) -->
+    <Reference Include="$(MSBuildThisFileDirectory)interop/*.dll" Private="false" />
+    <Reference Include="DiceModders.ModCore" HintPath="$(MSBuildThisFileDirectory)libs/DiceModders.ModCore.dll" Private="false" />
+  </ItemGroup>
+
+</Project>
