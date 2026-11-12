@@ -1,4 +1,4 @@
-// Japan's tech tree: a copy of the look-alike civilization's tree (ModCore.Civilizations.CloneTree) with the layout from assets\techtree.json.
+// Japan's tech tree: a copy of the look-alike civilization's tree (ModCore.Civilizations.CloneTree) with the layout from assets\techtree.json (built into the DLL).
 // Only Japanese players use it; the look-alike civilization keeps its own tree.
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ internal static class JapanTree
     /// <summary>The copy with our layout (ModCore asks for it whenever the game needs Japan's tree; the caller keeps it).</summary>
     public static TechTree BuildCopy()
     {
-        var wanted = Read(Japan.TechTreeFile);
+        var wanted = Read(Japan.TechTreeJson());
         if (wanted == null) return null;
         var copy = Core.Civilizations.CloneTree(Japan.CivId);
         Write(copy, wanted);
@@ -57,13 +57,13 @@ internal static class JapanTree
     /// techtree.json: slot, technology, position, unlocks. The game's links also have ports (which side of a box a line uses):
     /// as in the game's own trees, a box with several lines on one side spreads them by direction (-1 / 0 / +1 = towards lower / same / higher row).
     /// </summary>
-    static List<SlotData> Read(string path)
+    static List<SlotData> Read(string json)
     {
-        using var doc = JsonDocument.Parse(File.ReadAllText(path));
+        using var doc = JsonDocument.Parse(json);
         JsonElement slotsEl = default;
         foreach (var civ in doc.RootElement.EnumerateObject())
             if (civ.Value.ValueKind == JsonValueKind.Object && civ.Value.TryGetProperty("slots", out slotsEl)) break;
-        if (slotsEl.ValueKind != JsonValueKind.Array) { Japan.W("tech tree: no 'slots' array in " + path); return null; }
+        if (slotsEl.ValueKind != JsonValueKind.Array) { Japan.W("tech tree: no 'slots' array"); return null; }
 
         var list = new List<SlotData>();
         var unlocks = new List<string[]>();

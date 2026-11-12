@@ -17,27 +17,27 @@ internal static class Swapper
     static readonly HashSet<string> Described = new();
     static readonly HashSet<int> Logged = new();
 
-    internal static string Kebab(string s) => s.ToLower().Replace(' ', '-');
+    internal static string Kebab(string s) => s.ToLowerInvariant().Replace(' ', '-');
 
     /// <summary>"House Viking", "House Viking (1)", pooled "House Viking &lt;12&gt; #0003", "...(Clone)" -> "House Viking".</summary>
     internal static string BaseName(string n)
     {
-        foreach (var cut in new[] { " <", " (", "(" }) { var i = n.IndexOf(cut); if (i >= 0) n = n.Substring(0, i); }
+        foreach (var cut in new[] { " <", " (", "(" }) { var i = n.IndexOf(cut, StringComparison.Ordinal); if (i >= 0) n = n.Substring(0, i); }
         return n.Trim();
     }
 
     static string GroupOf(string n)
     {
         if (n == null) return null;
-        int i = n.IndexOf("-mesh_LOD");
+        int i = n.IndexOf("-mesh_LOD", StringComparison.Ordinal);
         if (i > 0) return n.Substring(0, i);
-        if (n.EndsWith("-mesh")) return n.Substring(0, n.Length - 5);
+        if (n.EndsWith("-mesh", StringComparison.Ordinal)) return n.Substring(0, n.Length - 5);
         return null;
     }
 
     static string Piece(string group, string mainGroup, string mainModel)
     {
-        if (mainModel == null || !group.StartsWith(mainGroup + "-")) return null;
+        if (mainModel == null || !group.StartsWith(mainGroup + "-", StringComparison.Ordinal)) return null;
         var m = mainModel + "-" + group.Substring(mainGroup.Length + 1);
         return Models.Exists(m) ? m : null;
     }
@@ -70,7 +70,7 @@ internal static class Swapper
         var go = bv.gameObject;
         var prefab = BaseName(go.name);
         var civWord = Japan.CivWord;
-        if (!prefab.EndsWith(" " + civWord)) return;
+        if (!prefab.EndsWith(" " + civWord, StringComparison.Ordinal)) return;
         var b = Kebab(prefab.Substring(0, prefab.Length - civWord.Length - 1));
         var own = b + "-" + Kebab(civWord);
         Japan.ModelMap.TryGetValue(own, out var mainName);
@@ -81,17 +81,17 @@ internal static class Swapper
         var filters = go.GetComponentsInChildren<MeshFilter>(true);
         var skinned = go.GetComponentsInChildren<SkinnedMeshRenderer>(true);
         bool hasOwn = false;
-        foreach (var mf in filters) { var g = GroupOf(mf.sharedMesh != null ? mf.sharedMesh.name : null) ?? GroupOf(mf.gameObject.name); if (g != null && (g == own || g.StartsWith(own + "-"))) { hasOwn = true; break; } }
-        if (!hasOwn) foreach (var r in skinned) { var g = GroupOf(r.sharedMesh != null ? r.sharedMesh.name : null) ?? GroupOf(r.gameObject.name); if (g != null && (g == own || g.StartsWith(own + "-"))) { hasOwn = true; break; } }
+        foreach (var mf in filters) { var g = GroupOf(mf.sharedMesh != null ? mf.sharedMesh.name : null) ?? GroupOf(mf.gameObject.name); if (g != null && (g == own || g.StartsWith(own + "-", StringComparison.Ordinal))) { hasOwn = true; break; } }
+        if (!hasOwn) foreach (var r in skinned) { var g = GroupOf(r.sharedMesh != null ? r.sharedMesh.name : null) ?? GroupOf(r.gameObject.name); if (g != null && (g == own || g.StartsWith(own + "-", StringComparison.Ordinal))) { hasOwn = true; break; } }
         var keep = hasOwn ? own : b + "-europe";
 
         string ModelFor(string g)
         {
             if (g == null) return null;
             if (g == keep) return Models.Exists(mainName) ? mainName : null;
-            if (g.StartsWith(keep + "-")) return Piece(g, keep, mainName);
+            if (g.StartsWith(keep + "-", StringComparison.Ordinal)) return Piece(g, keep, mainName);
             if (g != own) { var x = FromMap(g); if (x != null) return x; }   // e.g. ship-viking inside Dock Viking, inhabitants
-            foreach (var cp in civPrefixes) if (g == cp || g.StartsWith(cp + "-")) return "";   // another civ's body in the same prefab
+            foreach (var cp in civPrefixes) if (g == cp || g.StartsWith(cp + "-", StringComparison.Ordinal)) return "";   // another civ's body in the same prefab
             return null;
         }
 

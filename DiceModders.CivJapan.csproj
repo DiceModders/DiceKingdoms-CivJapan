@@ -26,4 +26,18 @@
     <Reference Include="DiceModders.ModCore" HintPath="$(MSBuildThisFileDirectory)libs/DiceModders.ModCore.dll" Private="false" />
   </ItemGroup>
 
+  <!-- the tech tree decides what can be researched (simulation data): built into the DLL, not read from the install folder -->
+  <ItemGroup>
+    <EmbeddedResource Include="assets/techtree.json" LogicalName="techtree.json" />
+  </ItemGroup>
+
+  <!-- reproducible: the same code gives the same DLL on every computer (ModCore compares DLL fingerprints in the lobby) -->
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <PathMap>$(MSBuildProjectDirectory)\=/_/</PathMap>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <EnableSourceLink>false</EnableSourceLink>
+    <EmbedUntrackedSources>false</EmbedUntrackedSources>
+  </PropertyGroup>
+
 </Project>

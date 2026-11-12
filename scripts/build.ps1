@@ -33,6 +33,7 @@ Copy-Item $dll $target -Force
 $assets = Join-Path $target "assets"
 if (Test-Path $assets) { Remove-Item $assets -Recurse -Force }
 Copy-Item (Join-Path $root "assets") $assets -Recurse
+Remove-Item (Join-Path $assets "techtree.json") -ErrorAction SilentlyContinue   # built into the DLL
 $loose = Join-Path $plugins ($project.BaseName + ".dll")
 if (Test-Path $loose) { Remove-Item $loose -Force }   # an older loose copy would load the civilization twice
 Write-Host ("installed " + $project.BaseName + "\ (DLL + assets)") -ForegroundColor Green

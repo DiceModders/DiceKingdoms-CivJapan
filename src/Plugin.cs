@@ -40,7 +40,14 @@ internal static class Japan
     internal static ManualLogSource Log;
     internal static string AssetDir;
     internal static string MeshDir => Path.Combine(AssetDir, "models");
-    internal static string TechTreeFile => Path.Combine(AssetDir, "techtree.json");
+    // the tech tree is simulation data, so it is built into the DLL: two players with the same mod version always have the same tree
+    internal static string TechTreeJson()
+    {
+        using var s = typeof(Japan).Assembly.GetManifestResourceStream("techtree.json");
+        if (s == null) throw new FileNotFoundException("techtree.json is not embedded in the DLL");
+        using var r = new StreamReader(s);
+        return r.ReadToEnd();
+    }
     internal static string BuildOrdersFile => Path.Combine(AssetDir, "build_orders.txt");
 
     internal static readonly Dictionary<string, string> ModelMap = new();   // "house-viking" -> "jp-house"

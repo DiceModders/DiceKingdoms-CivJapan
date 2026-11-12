@@ -27,7 +27,7 @@ Every player in the lobby needs this mod in the same version: a player without i
 | `src/Models.cs` | loads the `.dkmesh` models (cached after the first start) |
 | `src/Swapper.cs` | puts the models on the right parts of each building or unit |
 | `assets/japan.json` | key, look-alike civilization, names, texts, ground colours and which model goes on which game object |
-| `assets/techtree.json` | slot, technology, position and what each technology unlocks |
+| `assets/techtree.json` | slot, technology, position and what each technology unlocks. Built into the DLL (it decides what can be researched, so every player with the same version has the same tree) |
 | `assets/build_orders.txt` | the AI build orders |
 | `assets/models/*.dkmesh` | the models: plain text, one `v x y z u v` per vertex and `t a b c` per triangle, in the game's prefab space; UVs point into the game's 8x8 colour palette |
 

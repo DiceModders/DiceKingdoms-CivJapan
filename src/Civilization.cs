@@ -23,7 +23,7 @@ internal static class JapanCiv
     public static void Register()
     {
         string en = Japan.Names.TryGetValue("en", out var n) ? n : "Japan";
-        Civ = Core.Civilizations.Add(Japan.CivKey, en, File.Exists(Japan.TechTreeFile) ? (Func<TechTree>)Tree : null, Japan.CivId);
+        Civ = Core.Civilizations.Add(Japan.CivKey, en, Tree, Japan.CivId);
         if (Japan.Names.Count > 0) Core.Civilizations.Rename(Civ.Id, en, Japan.Names);
         foreach (var kv in Japan.Texts)   // unit / building / technology texts shown while the local player plays Japan
             Core.Civilizations.SetText(Civ.Id, kv.Key, kv.Value.TryGetValue("en", out var t) ? t : new List<string>(kv.Value.Values)[0], kv.Value);
@@ -38,12 +38,15 @@ internal static class JapanCiv
         Japan.W("'" + en + "' registered as civilization " + Civ.Id + " (key " + Japan.CivKey + ", looks like " + Japan.CivEnum + ")");
     }
 
+    /// <summary>Built once; after a failure the look-alike's tree is used (ModCore asks on every lookup, so the failure is remembered).</summary>
     static TechTree Tree()
     {
-        if (_tree != null) return _tree;
+        if (_treeTried) return _tree;
+        _treeTried = true;
         try { _tree = JapanTree.BuildCopy(); } catch (Exception e) { Japan.Once("tree", "tech tree FAIL " + e); }
         return _tree;
     }
+    static bool _treeTried;
 
     /// <summary>Once, when the game data has loaded.</summary>
     static void Build()
@@ -58,14 +61,14 @@ internal static class JapanCiv
         var ragdolls = new Dictionary<IntPtr, Ragdoll>();
         foreach (var r in Resources.FindObjectsOfTypeAll<Ragdoll>())
         {
-            if (r.gameObject.scene.IsValid() || !r.gameObject.name.EndsWith(word)) continue;
+            if (r.gameObject.scene.IsValid() || !r.gameObject.name.EndsWith(word, StringComparison.Ordinal)) continue;
             var copy = Tools.Prefabs.Copy(r);
             Swapper.Other(copy.gameObject, "civ");
             ragdolls[r.Pointer] = copy;
         }
 
         int b = 0, u = 0;
-        var seen = new HashSet<IntPtr>();
+        var copies = new Dictionary<IntPtr, BuildingVisual>();   // two building types may share one prefab: both get the same copy
         var pictures = new List<Picture>();
         var typeSets = Resources.FindObjectsOfTypeAll<BuildingTypes>();
         if (typeSets.Length == 0) { Japan.W("no BuildingTypes asset"); return; }
@@ -74,26 +77,39 @@ internal static class JapanCiv
             if (bt == null) continue;
             BuildingVisual prefab;
             try { prefab = look.GetBuildingVisualPrefab(bt); } catch { continue; }
-            if (prefab == null || !seen.Add(prefab.Pointer) || !Swapper.BaseName(prefab.gameObject.name).EndsWith(" " + Japan.CivWord)) continue;
-            var copy = Tools.Prefabs.Copy(prefab);
-            Swapper.Building(copy, "civ");
-            Relink(copy.gameObject, ragdolls);
-            Civ.Skins.Building(bt.name, copy);
-            if (HasModel(prefab)) pictures.Add(new Picture(prefab.icons, copy.gameObject, s => copy.icons = s, false));
-            b++;
+            if (prefab == null || !Swapper.BaseName(prefab.gameObject.name).EndsWith(" " + Japan.CivWord, StringComparison.Ordinal)) continue;
+            try
+            {
+                if (!copies.TryGetValue(prefab.Pointer, out var copy))
+                {
+                    copy = Tools.Prefabs.Copy(prefab);
+                    Swapper.Building(copy, "civ");
+                    Relink(copy.gameObject, ragdolls);
+                    copies[prefab.Pointer] = copy;
+                    var c = copy;
+                    if (HasModel(prefab)) pictures.Add(new Picture(prefab.icons, copy.gameObject, s => c.icons = s, false));
+                }
+                Civ.Skins.Building(bt.name, copy);
+                b++;
+            }
+            catch (Exception e) { Japan.W("building " + bt.name + " FAIL (keeps the look-alike's): " + e.Message); }
         }
         foreach (Unit.Type type in Enum.GetValues(typeof(Unit.Type)))
         {
             UnitVisual prefab;
             try { prefab = look.GetUnitVisualPrefab(type); } catch { continue; }
             if (prefab == null) continue;
-            var copy = Tools.Prefabs.Copy(prefab);
-            Swapper.Other(copy.gameObject, "civ");
-            Relink(copy.gameObject, ragdolls);
-            if (Japan.ModelMap.ContainsKey(Swapper.Kebab(type.ToString()) + word))
-                pictures.Add(new Picture(prefab.icons, copy.gameObject, s => copy.icons = s, true));
-            Civ.Skins.Unit((int)type, copy);
-            u++;
+            try
+            {
+                var copy = Tools.Prefabs.Copy(prefab);
+                Swapper.Other(copy.gameObject, "civ");
+                Relink(copy.gameObject, ragdolls);
+                if (Japan.ModelMap.ContainsKey(Swapper.Kebab(type.ToString()) + word))
+                    pictures.Add(new Picture(prefab.icons, copy.gameObject, s => copy.icons = s, true));
+                Civ.Skins.Unit((int)type, copy);
+                u++;
+            }
+            catch (Exception e) { Japan.W("unit " + type + " FAIL (keeps the look-alike's): " + e.Message); }
         }
         try
         {
@@ -123,12 +139,12 @@ internal static class JapanCiv
     /// </summary>
     static void RenderPictures(List<Picture> list)
     {
+        list = list.FindAll(p => p.Original != null && p.Original.Length > 0 && p.Original[0] != null);   // counted below: skip before counting
         int left = list.Count;
         var texts = new List<Tools.TextSprites.Entry>();
         var names = new List<string>();
         foreach (var p in list)
         {
-            if (p.Original == null || p.Original.Length == 0 || p.Original[0] == null) { left--; continue; }
             var first = p.Original[0].rect;
             string name = Japan.CivKey + " " + p.Copy.name;
             names.Add(name);
@@ -152,11 +168,19 @@ internal static class JapanCiv
                 {
                     var key = new System.Text.StringBuilder();
                     foreach (var k in names) key.Append(Tools.IconRenderer.CacheKey(k)).Append(';');
-                    int pics = Tools.TextSprites.AddLike(Civ.Name + " Text", texts, key.ToString().GetHashCode().ToString("X8"));
+                    int pics = Tools.TextSprites.AddLike(Civ.Name + " Text", texts, StableHash(key.ToString()));
                     Japan.W(list.Count + " picture sets taken in the game, " + pics + " text pictures");
                 }
             });
         }
+    }
+
+    /// <summary>FNV-1a as hex: the same on every launch (string.GetHashCode is not, so it would miss the cache every time).</summary>
+    static string StableHash(string s)
+    {
+        uint h = 2166136261;
+        foreach (char ch in s) { h ^= ch; h *= 16777619; }
+        return h.ToString("X8");
     }
 
     /// <summary>Every ReplaceWithRagdoll in the copy (the unit itself, inhabitants inside buildings) points to our ragdoll copy.</summary>

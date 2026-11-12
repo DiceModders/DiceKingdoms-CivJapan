@@ -260,8 +260,8 @@ internal static class Models
         for (int i = 0; i < mats.Length; i++)
         {
             if (mats[i] == null) continue;
-            if (mats[i].name.StartsWith("Colored-Paper")) slot = i;
-            if (mats[i].name.StartsWith("Windy-Crops")) crop = i;
+            if (mats[i].name.StartsWith("Colored-Paper", StringComparison.Ordinal)) slot = i;
+            if (mats[i].name.StartsWith("Windy-Crops", StringComparison.Ordinal)) crop = i;
         }
         bool split = model.CropTris != null && model.CropTris.Length > 0 && crop >= 0 && crop != slot;
         if (slot == 0 && !split) return model.Mesh;
@@ -293,8 +293,8 @@ internal static class Models
         for (int i = 0; i < mats.Length; i++)
         {
             if (mats[i] == null) continue;
-            if (mats[i].name.StartsWith("Colored-Paper")) slot = i;
-            if (mats[i].name.StartsWith("Sail")) sail = i;
+            if (mats[i].name.StartsWith("Colored-Paper", StringComparison.Ordinal)) slot = i;
+            if (mats[i].name.StartsWith("Sail", StringComparison.Ordinal)) sail = i;
         }
         var bones = r.bones;
         var bnames = new string[bones.Length];
