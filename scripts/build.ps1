@@ -1,7 +1,7 @@
 <#
 .SYNOPSIS
   Builds this mod, installs it into the game's BepInEx\plugins folder and sets BepInEx logging.
-  Normal build (Release): console window and log file OFF.  -Dev (Debug, defines DEVLOG): console window and LogOutput.log ON.
+  Normal build (Release): BepInEx logging left as it is.  -Dev (Debug, defines DEVLOG): console window and LogOutput.log ON.  -Quiet: both OFF.
 
 .EXAMPLE
   .\scripts\build.ps1 -GameDir "<your Dice-Kingdoms folder>"   # first time: remembers the folder
@@ -10,7 +10,7 @@
 
   If PowerShell refuses to run scripts:  powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1
 #>
-param([string]$GameDir, [switch]$Dev, [switch]$Run)
+param([string]$GameDir, [switch]$Dev, [switch]$Run, [switch]$Quiet)
 $ErrorActionPreference = "Stop"
 $root = Split-Path $PSScriptRoot -Parent
 . (Join-Path $PSScriptRoot "common.ps1")
@@ -37,5 +37,6 @@ Remove-Item (Join-Path $assets "techtree.json") -ErrorAction SilentlyContinue   
 $loose = Join-Path $plugins ($project.BaseName + ".dll")
 if (Test-Path $loose) { Remove-Item $loose -Force }   # an older loose copy would load the civilization twice
 Write-Host ("installed " + $project.BaseName + "\ (DLL + assets)") -ForegroundColor Green
-Set-BepInExLogging $GameDir ([bool]$Dev)
+# a normal install leaves logging alone (it used to switch the log file off on every install, hiding the next run's log)
+if ($Dev) { Set-BepInExLogging $GameDir $true } elseif ($Quiet) { Set-BepInExLogging $GameDir $false }
 if ($Run) { Start-Process "steam://rungameid/1501690" }   # through Steam, so Steam does not inherit BepInEx's start-up variables

@@ -5,84 +5,112 @@
  "texts": {
   "unit.SOLDIER.name": {
    "en": "Ashigaru",
+   "de": "Ashigaru",
+   "fr": "Ashigaru",
    "ru": "Асигару",
    "uk": "Асіґару",
    "zh-CN": "足轻"
   },
   "unit.ARCHER.name": {
    "en": "Yumi Ashigaru",
+   "de": "Yumi-Ashigaru",
+   "fr": "Ashigaru archer",
    "ru": "Лучник-асигару",
    "uk": "Лучник-асіґару",
    "zh-CN": "弓足轻"
   },
   "unit.GENERAL.name": {
    "en": "Taisho",
+   "de": "Taisho",
+   "fr": "Taisho",
    "ru": "Тайсё",
    "uk": "Тайсьо",
    "zh-CN": "大将"
   },
   "unit.KING.name": {
    "en": "Daimyo",
+   "de": "Daimyo",
+   "fr": "Daimyo",
    "ru": "Даймё",
    "uk": "Даймьо",
    "zh-CN": "大名"
   },
   "unit.PEASANT.name": {
    "en": "Hyakusho",
+   "de": "Hyakusho",
+   "fr": "Hyakusho",
    "ru": "Хякусё",
    "uk": "Хякусьо",
    "zh-CN": "百姓"
   },
   "unit.BOURGEOIS.name": {
    "en": "Chonin",
+   "de": "Chonin",
+   "fr": "Chonin",
    "ru": "Тёнин",
    "uk": "Тьонін",
    "zh-CN": "町人"
   },
   "unit.PRIEST.name": {
    "en": "Soryo",
+   "de": "Soryo",
+   "fr": "Soryo",
    "ru": "Сорё",
    "uk": "Сорьо",
    "zh-CN": "僧侣"
   },
   "unit.SORCERER.name": {
    "en": "Onmyoji",
+   "de": "Onmyoji",
+   "fr": "Onmyoji",
    "ru": "Оммёдзи",
    "uk": "Онмьоджі",
    "zh-CN": "阴阳师"
   },
   "unit.TEMPLAR.name": {
    "en": "Sohei",
+   "de": "Sohei",
+   "fr": "Sohei",
    "ru": "Сохэй",
    "uk": "Сохей",
    "zh-CN": "僧兵"
   },
   "unit.WARLOCK.name": {
    "en": "Yamabushi",
+   "de": "Yamabushi",
+   "fr": "Yamabushi",
    "ru": "Ямабуси",
    "uk": "Ямабусі",
    "zh-CN": "山伏"
   },
   "technology.TEMPLARS.name": {
    "en": "Sohei",
+   "de": "Sohei",
+   "fr": "Sohei",
    "ru": "Сохэй",
    "uk": "Сохей",
    "zh-CN": "僧兵"
   },
   "technology.TEMPLARS.description": {
    "en": "Replaces ashigaru with sohei.",
+   "de": "Ersetzt Ashigaru durch Sohei.",
+   "fr": "Remplace les ashigaru par des sohei.",
    "ru": "Заменяет асигару на сохэев.",
    "uk": "Замінює асіґару на сохеїв.",
    "zh-CN": "以僧兵取代足轻。"
   },
   "technology.WARLOCKS.name": {
    "en": "Yamabushi",
+   "de": "Yamabushi",
+   "fr": "Yamabushi",
    "ru": "Ямабуси",
    "uk": "Ямабусі",
    "zh-CN": "山伏"
   },
   "technology.WARLOCKS.description": {
    "en": "Replaces yumi ashigaru with yamabushi.",
+   "de": "Ersetzt Yumi-Ashigaru durch Yamabushi.",
+   "fr": "Remplace les ashigaru archers par des yamabushi.",
    "ru": "Заменяет лучников-асигару на ямабуси.",
    "uk": "Замінює лучників-асіґару на ямабусі.",
    "zh-CN": "以山伏取代弓足轻。"
