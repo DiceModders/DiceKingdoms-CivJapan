@@ -8,7 +8,7 @@ Adds **Japan** to the civilization choice in the lobby, next to the game's own c
 
 * **Buildings, units, ship and ragdolls**: Japanese 3D models (castle, walls and gates, houses, temple, farms, barracks, lighthouse, and every unit type).
 * **Pictures**: the building and unit pictures (build menu, lobby, scoreboard and the small pictures inside texts) are taken in the game from the new models, in every player colour. The first start after installing takes a little longer while they are made; after that they are read from the cache.
-* **Texts**: the civilization's name and the unit, building and technology texts (name in English, German, French, Russian, Ukrainian and Chinese; the other texts in English, Russian, Ukrainian and Chinese).
+* **Texts**: the civilization's name and the unit, building and technology texts (in English, German, French, Russian, Ukrainian and Chinese).
 * **Ground colours**: Japanese ground and nature colours on its island.
 * **Tech tree**: its own layout of the technologies.
 * **AI**: build orders written for this tree, so computer players can play Japan.
